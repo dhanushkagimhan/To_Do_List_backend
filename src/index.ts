@@ -24,7 +24,7 @@ const startServer = (): void => {
     const PORT: string | number = process.env.PORT ?? 9090;
 
     const corOptions = {
-        origin: "http://localhost:3000",
+        origin: "*",
         methods: "GET,PATCH,POST,DELETE",
     };
 

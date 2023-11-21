@@ -5,7 +5,6 @@ export const completeTaskValidation = checkExact(
         isCompleted: {
             exists: {
                 errorMessage: "isCompleted is required",
-                options: { checkFalsy: true },
                 bail: true,
             },
             isBoolean: {
