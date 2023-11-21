@@ -9,4 +9,6 @@ taskRouter.post("/", [
     controller.createTask,
 ] as RequestHandler[]);
 
+taskRouter.get("/", controller.getAll as RequestHandler);
+
 export default taskRouter;
