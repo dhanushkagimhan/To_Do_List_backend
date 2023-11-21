@@ -1,18 +1,7 @@
 import { checkExact, checkSchema } from "express-validator";
 
-export const completeTaskValidation = checkExact(
+export const deleteTaskValidation = checkExact(
     checkSchema({
-        isCompleted: {
-            exists: {
-                errorMessage: "isCompleted is required",
-                options: { checkFalsy: true },
-                bail: true,
-            },
-            isBoolean: {
-                errorMessage: "isCompleted should be boolean",
-                bail: true,
-            },
-        },
         taskId: {
             exists: {
                 errorMessage: "taskId is required",

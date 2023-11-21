@@ -16,4 +16,9 @@ taskRouter.patch("/complete/:taskId", [
     controller.completeTask,
 ] as RequestHandler[]);
 
+taskRouter.delete("/:taskId", [
+    validation.deleteTaskValidation,
+    controller.deleteTask,
+] as RequestHandler[]);
+
 export default taskRouter;
