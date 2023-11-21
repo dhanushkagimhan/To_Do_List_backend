@@ -11,4 +11,9 @@ taskRouter.post("/", [
 
 taskRouter.get("/", controller.getAll as RequestHandler);
 
+taskRouter.patch("/complete/:taskId", [
+    validation.completeTaskValidation,
+    controller.completeTask,
+] as RequestHandler[]);
+
 export default taskRouter;
