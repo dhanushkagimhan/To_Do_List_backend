@@ -5,30 +5,44 @@ import express, {
 } from "express";
 import cors from "cors";
 import "dotenv/config";
-// import router from "./routes";
+import mongoose from "mongoose";
+import { config } from "./config/cofig";
+import router from "./routes";
 
-const app: Application = express();
-const PORT: string | number = process.env.PORT ?? 9090;
-
-const corOptions = {
-    origin: "http://localhost:3000",
-    methods: "GET,PATCH,POST,DELETE",
-};
-
-app.use(cors(corOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.get("/", (req: Request, res: Response) => {
-    res.json({ message: "Hello from API Services!" });
-});
-
-// app.use("/v1", router);
-
-try {
-    app.listen(PORT, () => {
-        console.log(`Server is listening PORT: ${PORT}`);
+mongoose
+    .connect(config.mongo_url)
+    .then(() => {
+        console.log("Conected database");
+        startServer();
+    })
+    .catch((error) => {
+        console.log("Database connection issue : ", error);
     });
-} catch (error: any) {
-    console.log(`Error occurred: ${error.message}`);
-}
+
+const startServer = (): void => {
+    const app: Application = express();
+    const PORT: string | number = process.env.PORT ?? 9090;
+
+    const corOptions = {
+        origin: "http://localhost:3000",
+        methods: "GET,PATCH,POST,DELETE",
+    };
+
+    app.use(cors(corOptions));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+
+    app.get("/", (req: Request, res: Response) => {
+        res.json({ message: "Hello from API Services!" });
+    });
+
+    app.use("/v1", router);
+
+    try {
+        app.listen(PORT, () => {
+            console.log(`Server is listening PORT: ${PORT}`);
+        });
+    } catch (error: any) {
+        console.log(`Error occurred when server starting: ${error.message}`);
+    }
+};
