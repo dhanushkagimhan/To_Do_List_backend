@@ -14,7 +14,8 @@
 
 ### add following code in to .env file in root directory
 
-<code>PORT = 9090<br>MONGO_URL = "mongodb://127.0.0.1:27017/to_do_list"</code>
+<code>PORT = 9090
+MONGO_URL = "mongodb://127.0.0.1:27017/to_do_list"</code>
 
 ### run following command
 
