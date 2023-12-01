@@ -9,7 +9,10 @@ taskRouter.post("/", [
     controller.createTask,
 ] as RequestHandler[]);
 
-taskRouter.get("/", controller.getAll as RequestHandler);
+taskRouter.get("/", [
+    validation.getAllValidation,
+    controller.getAll,
+] as RequestHandler[]);
 
 taskRouter.patch("/complete/:taskId", [
     validation.completeTaskValidation,
