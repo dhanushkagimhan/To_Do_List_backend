@@ -21,8 +21,6 @@ const createTask = async (
     next: NextFunction,
 ): Promise<Response> => {
     try {
-        const payload: ReqPayload = req.body;
-
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -33,6 +31,8 @@ const createTask = async (
             };
             return res.status(400).send(responseData);
         }
+
+        const payload: ReqPayload = req.body;
 
         const task = new Task({
             _id: new mongoose.Types.ObjectId(),

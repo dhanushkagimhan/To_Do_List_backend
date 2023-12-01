@@ -14,8 +14,6 @@ const deleteTask = async (
     next: NextFunction,
 ): Promise<Response> => {
     try {
-        const taskId = req.params.taskId;
-
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -26,6 +24,8 @@ const deleteTask = async (
             };
             return res.status(400).send(responseData);
         }
+
+        const taskId = req.params.taskId;
 
         const task = await Task.findByIdAndDelete(taskId);
 

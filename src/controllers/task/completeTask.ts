@@ -19,10 +19,6 @@ const completeTask = async (
     next: NextFunction,
 ): Promise<Response> => {
     try {
-        const payload: ReqPayload = req.body;
-
-        const taskId = req.params.taskId;
-
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -33,6 +29,9 @@ const completeTask = async (
             };
             return res.status(400).send(responseData);
         }
+        const taskId = req.params.taskId;
+
+        const payload: ReqPayload = req.body;
 
         const task = await Task.findById(taskId);
 
